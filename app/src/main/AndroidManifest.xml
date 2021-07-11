@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.ztech.lodgeme">
+
+    <application
+        android:allowBackup="false"
+        tools:replace="android:allowBackup"
+        android:icon="@mipmap/lm_ic"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/lm_round_ic"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <activity android:name=".Splash">
+
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+    </activity>
+
+        <activity android:name=".MainActivity" />
+        <activity android:name=".ProfileSelectionActivity" />
+        <activity android:name=".StepperActivity" />
+        <activity android:name=".AgentSignup" />
+        <activity android:name=".GuestSignup" />
+        <activity android:name=".GuestProfileMenu" />
+        <activity android:name=".AgentDashboard" />
+        <activity android:name=".AgentProfileMenu" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".GuestMapNavigation" />
+
+
+    </application>
+</manifest>

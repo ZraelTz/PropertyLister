@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "941831815054",
+    "project_id": "lodgeme-28769",
+    "storage_bucket": "lodgeme-28769.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:941831815054:android:80792f31ecba2ac5bfeedf",
+        "android_client_info": {
+          "package_name": "com.ztech.lodgeme"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "941831815054-96afbca5ipnh95uebi5u90oh0592ivgq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDS2wxrgpHfuYN-sjAIbyf-PxqT5ywgmlc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "941831815054-96afbca5ipnh95uebi5u90oh0592ivgq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
