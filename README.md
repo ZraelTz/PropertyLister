@@ -22,14 +22,14 @@ The goal is to have agent/guest user types who can respectively create and acces
 *  [x] Sign In/ SignUp  
 *  [x] Agent Dashboard
     * [x] Front-end
-    * [] Backend
-*  [] Guest Dashboard
+    * [ ] Backend
+*  [ ] Guest Dashboard
     * [x] Front-end
-    * [] Backend
-*  [] Firebase Notifications   
-*  [] Google Maps
+    * [ ] Backend
+*  [ ] Firebase Notifications   
+*  [ ] Google Maps
     * get automatic location updates
     * search for locations
     * see notification update as map popups
-* []  Online Payment System.
+* [ ]  Online Payment System.
 * and more.
