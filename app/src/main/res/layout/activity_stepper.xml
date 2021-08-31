@@ -7,7 +7,7 @@
     android:background="@android:color/white"
     android:fitsSystemWindows="false"
     android:orientation="vertical"
-    tools:context=".StepperActivity">
+    tools:context="com.ztech.propertylister.StepperActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"

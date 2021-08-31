@@ -52,7 +52,7 @@
                     android:layout_height="@dimen/spacing_middle"
                     android:layout_margin="@dimen/spacing_medium"
                     android:src="@drawable/shape_circle"
-                    app:tint="@color/blue_600" />
+                    app:tint="@color/blue_grey_700" />
 
                 <View
                     android:layout_width="@dimen/spacing_middle"
@@ -61,7 +61,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Guest Information"
+                    android:text="Account Information"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
                     android:textColor="@color/blue_grey_700" />
 
@@ -73,6 +73,7 @@
                 android:layout_marginTop="@dimen/spacing_middle"
                 app:cardBackgroundColor="@android:color/white"
                 app:cardCornerRadius="10dp"
+                android:visibility="visible"
                 app:cardElevation="1dp"
                 app:cardUseCompatPadding="true">
 
@@ -97,8 +98,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:background="@color/grey_5" />
-
-
 
                     <View
                         android:layout_width="match_parent"
@@ -166,7 +165,7 @@
                     android:layout_height="@dimen/spacing_middle"
                     android:layout_margin="@dimen/spacing_medium"
                     android:src="@drawable/shape_circle"
-                    android:tint="@color/blue_600" />
+                    android:tint="@color/blue_grey_700" />
 
                 <View
                     android:layout_width="@dimen/spacing_middle"
@@ -175,7 +174,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Profile Information"
+                    android:text="Guest Information"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
                     android:textColor="@color/blue_grey_700" />
 
@@ -282,7 +281,7 @@
         android:layout_marginBottom="150dp"
         android:orientation="vertical">
 
-        <com.ztech.lodgeme.widget.ViewLoadingDotsGrow
+        <com.ztech.propertylister.widget.ViewLoadingDotsGrow
             android:layout_width="50dp"
             android:layout_height="40dp"
             android:background="@color/blue_300" />

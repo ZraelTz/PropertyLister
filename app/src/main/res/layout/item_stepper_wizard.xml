@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/white"
     android:padding="@dimen/spacing_xlarge"
-    tools:context=".StepperActivity">
+    tools:context="com.ztech.propertylister.StepperActivity">
 
     <LinearLayout
         android:layout_width="wrap_content"

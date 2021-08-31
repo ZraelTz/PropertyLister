@@ -56,7 +56,7 @@
                     android:layout_height="@dimen/spacing_middle"
                     android:layout_margin="@dimen/spacing_medium"
                     android:src="@drawable/shape_circle"
-                    app:tint="@color/blue_600" />
+                    app:tint="@color/blue_grey_700" />
 
                 <View
                     android:layout_width="13dp"
@@ -65,7 +65,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Agent Information"
+                    android:text="Account Information"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
                     android:textColor="@color/blue_grey_700" />
 
@@ -164,7 +164,7 @@
                     android:layout_height="@dimen/spacing_middle"
                     android:layout_margin="@dimen/spacing_medium"
                     android:src="@drawable/shape_circle"
-                    app:tint="@color/blue_600" />
+                    app:tint="@color/blue_grey_700" />
 
                 <View
                     android:layout_width="@dimen/spacing_middle"
@@ -173,7 +173,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Profile Information"
+                    android:text="Agent Information"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
                     android:textColor="@color/blue_grey_700" />
 
@@ -201,6 +201,57 @@
                         android:background="@android:color/transparent"
                         android:hint="Full Name"
                         android:inputType="textPersonName"
+                        android:minHeight="@dimen/spacing_xmlarge"
+                        android:paddingLeft="@dimen/spacing_large"
+                        android:paddingRight="@dimen/spacing_large" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/grey_5" />
+
+                    <EditText
+                        android:id="@+id/agent_dob"
+                        style="@style/EditText.Flat.Grey"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/spacing_xxlarge"
+                        android:background="@android:color/transparent"
+                        android:hint="Date of Birth"
+                        android:inputType="text"
+                        android:minHeight="@dimen/spacing_xmlarge"
+                        android:paddingLeft="@dimen/spacing_large"
+                        android:paddingRight="@dimen/spacing_large" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/grey_5" />
+
+                    <EditText
+                        android:id="@+id/agent_address"
+                        style="@style/EditText.Flat.Grey"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/spacing_xxlarge"
+                        android:background="@android:color/transparent"
+                        android:hint="Address"
+                        android:inputType="text"
+                        android:minHeight="@dimen/spacing_xmlarge"
+                        android:paddingLeft="@dimen/spacing_large"
+                        android:paddingRight="@dimen/spacing_large" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/grey_5" />
+
+                    <EditText
+                        android:id="@+id/agent_id"
+                        style="@style/EditText.Flat.Grey"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/spacing_xxlarge"
+                        android:background="@android:color/transparent"
+                        android:hint="Government Id"
+                        android:inputType="number"
                         android:minHeight="@dimen/spacing_xmlarge"
                         android:paddingLeft="@dimen/spacing_large"
                         android:paddingRight="@dimen/spacing_large" />
@@ -276,10 +327,10 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="150dp"
+        android:layout_marginBottom="10dp"
         android:orientation="vertical">
 
-        <com.ztech.lodgeme.widget.ViewLoadingDotsGrow
+        <com.ztech.propertylister.widget.ViewLoadingDotsGrow
             android:layout_width="50dp"
             android:layout_height="40dp"
             android:background="@color/blue_300" />

@@ -98,7 +98,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_medium"
-                android:text="Get lodge updates from agents around the school as notifications."
+                android:text="Get lodge updates from agents around you by notifications."
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textColor="@color/blue_grey_400" />
 
