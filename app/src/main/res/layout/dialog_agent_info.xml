@@ -25,7 +25,7 @@
                 android:layout_width="?attr/actionBarSize"
                 android:layout_height="?attr/actionBarSize"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:tint="@color/blue_600"
+                android:tint="@color/grey_90"
                 app:srcCompat="@drawable/ic_arrow_back" />
 
             <View
@@ -52,7 +52,7 @@
                 android:layout_marginBottom="30dp"
                 android:text="About Agent Profile"
                 android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                android:textColor="@color/blue_600"
+                android:textColor="@color/colorPrimary"
                 android:textStyle="bold" />
 
             <androidx.appcompat.widget.LinearLayoutCompat
@@ -64,7 +64,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@drawable/ic_home"
-                android:tint="@color/blue_grey_700"
+                android:tint="@color/grey_90"
                 android:layout_marginTop="2dp"
                 android:layout_marginRight="8dp"
                 android:background="@android:color/transparent"/>
@@ -91,7 +91,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@drawable/ic_pin_drop"
-                android:tint="@color/blue_grey_700"
+                android:tint="@color/grey_90"
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="9dp"
                 android:background="@android:color/transparent"/>
@@ -116,7 +116,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@drawable/ic_settings"
-                android:tint="@color/blue_grey_700"
+                android:tint="@color/grey_90"
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="8dp"
                 android:background="@android:color/transparent"/>

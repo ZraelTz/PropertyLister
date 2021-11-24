@@ -13,7 +13,7 @@
         android:fitsSystemWindows="false"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:contentInsetStartWithNavigation="0dp"
-        app:titleTextColor="@color/blue_600"
+        app:titleTextColor="@color/grey_90"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
     <androidx.core.widget.NestedScrollView
@@ -52,7 +52,7 @@
                     android:layout_height="@dimen/spacing_middle"
                     android:layout_margin="@dimen/spacing_medium"
                     android:src="@drawable/shape_circle"
-                    app:tint="@color/blue_grey_700" />
+                    app:tint="@color/grey_90" />
 
                 <View
                     android:layout_width="@dimen/spacing_middle"
@@ -63,7 +63,18 @@
                     android:layout_height="wrap_content"
                     android:text="Account Information"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
-                    android:textColor="@color/blue_grey_700" />
+                    android:textColor="@color/grey_90" />
+
+                <TextView
+                    android:id="@+id/resend_email_guest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="120px"
+                    android:clickable="true"
+                    android:text="Didn't get email?"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -165,7 +176,7 @@
                     android:layout_height="@dimen/spacing_middle"
                     android:layout_margin="@dimen/spacing_medium"
                     android:src="@drawable/shape_circle"
-                    android:tint="@color/blue_grey_700" />
+                    app:tint="@color/grey_90" />
 
                 <View
                     android:layout_width="@dimen/spacing_middle"
@@ -176,7 +187,7 @@
                     android:layout_height="wrap_content"
                     android:text="Guest Information"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
-                    android:textColor="@color/blue_grey_700" />
+                    android:textColor="@color/grey_90" />
 
             </LinearLayout>
 
@@ -263,8 +274,8 @@
                     android:clickable="true"
                     android:text="Sign In"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
-                    android:textColor="@color/blue_600"
-                    android:textStyle="bold" />
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"/>
 
             </LinearLayout>
 
@@ -297,7 +308,7 @@
         android:layout_alignParentRight="true"
         android:layout_margin="@dimen/spacing_large"
         android:clickable="true"
-        app:backgroundTint="@color/blue_grey_800"
+        app:backgroundTint="@color/grey_90"
         app:fabSize="normal"
         app:rippleColor="@color/blue_grey_700"
         app:srcCompat="@drawable/ic_done" />

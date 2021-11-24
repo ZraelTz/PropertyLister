@@ -27,7 +27,7 @@
             app:srcCompat="@drawable/ic_close" />
 
         <View
-            android:layout_width="@dimen/spacing_large"
+            android:layout_width="@dimen/spacing_small"
             android:layout_height="0dp" />
 
         <TextView

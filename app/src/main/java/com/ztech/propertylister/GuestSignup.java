@@ -3,11 +3,13 @@ package com.ztech.propertylister;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.util.Patterns;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -26,6 +28,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
 
+import com.google.firebase.auth.ActionCodeSettings;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -35,9 +38,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.ztech.lodgeme.R;
 import com.ztech.propertylister.utils.ViewAnimation;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -49,12 +56,7 @@ public class GuestSignup extends AppCompatActivity {
     private EditText fullNameField;
     private EditText phoneField;
     private EditText gender;
-
-    private static final Pattern PASSWORD_REGEX = Pattern.compile("^" +
-            "(?=.*[@#$%^&+=])" +     // at least 1 special character
-            "(?=\\S+$)" +            // no white spaces
-            ".{8,}" +                // at least 8 characters
-            "$");
+    private TextView resendEmail;
 
     private CoordinatorLayout parentView;
     Context mcontext;
@@ -62,6 +64,7 @@ public class GuestSignup extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DocumentReference ref;
 
+    //activity lifecycle methods
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +76,7 @@ public class GuestSignup extends AppCompatActivity {
         fullNameField = (EditText) findViewById(R.id.guest_name);
         phoneField = (EditText) findViewById(R.id.guest_phone);
         gender = (EditText) findViewById(R.id.guest_gender);
+        resendEmail = findViewById(R.id.resend_email_guest);
         firebaseFirestore = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
         initToolbar();
@@ -82,6 +86,7 @@ public class GuestSignup extends AppCompatActivity {
         mcontext = this.getApplicationContext();
     }
 
+    //toolbar initialization method
     private void initToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -89,14 +94,13 @@ public class GuestSignup extends AppCompatActivity {
         parentView = findViewById(R.id.guest_parent_view);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Signup as Guest");
+        resendEmail.setVisibility(View.GONE);
         Tools.setSystemBarLight(this);
         Tools.setSystemBarColor(this, R.color.overlay_light_90);
         getWindow().setNavigationBarColor(getResources().getColor(R.color.overlay_light_90));
     }
-
+    //activity initialization methods
     private void initComponent() {
-
-
         emailField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -114,8 +118,6 @@ public class GuestSignup extends AppCompatActivity {
             }
         });
 
-
-
         passwordField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -132,8 +134,6 @@ public class GuestSignup extends AppCompatActivity {
                 validatePassword();
             }
         });
-
-
 
         confirmPasswordField.addTextChangedListener(new TextWatcher() {
             @Override
@@ -163,7 +163,7 @@ public class GuestSignup extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(!getSignUpEligibility()){
-                    snackBarIconInfo("You need to correctly fill out all the fields",
+                    Tools.snackBarIconInfo(mcontext, parentView, getLayoutInflater(), "You need to correctly fill out all the fields",
                             R.color.blue_grey_700, R.drawable.ic_error_outline);
                 } else {
                     try {
@@ -178,6 +178,13 @@ public class GuestSignup extends AppCompatActivity {
                 }
             }
 
+        });
+
+        resendEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendEmailVerificationLink();
+            }
         });
 
         findViewById(R.id.sign_in).setOnClickListener(new View.OnClickListener(){
@@ -200,47 +207,17 @@ public class GuestSignup extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private boolean validateEmail(){
-        String emailInput = emailField.getText().toString().trim();
-        if(emailInput.isEmpty()){
-            emailField.setError("Email is required", getResources().getDrawable(R.drawable.ic_error_outline));
-            return false;
-        } else if(!Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()){
-            emailField.setError("Please provide a valid Email Address", getResources().getDrawable(R.drawable.ic_error_outline));
-            return false;
-        } else {
-            emailField.setBackgroundColor(getResources().getColor(R.color.mdtp_white));
-            emailField.setHintTextColor(getResources().getColor(R.color.blue_grey_700));
-            return true;
-        }
+    //form validation methods
+    private boolean validatePassword() {
+        return Tools.validatePassword(passwordField, mcontext);
     }
 
-    private boolean validatePassword(){
-        String passwordInput = passwordField.getText().toString().trim();
-        if(passwordInput.isEmpty()){
-            passwordField.setError("Password is required", getResources().getDrawable(R.drawable.ic_error_outline));
-            return false;
-        } else if(!PASSWORD_REGEX.matcher(passwordInput).matches()){
-            passwordField.setError("Password must consist at least 8 characters including a symbol", getResources().getDrawable(R.drawable.ic_error_outline));
-            return false;
-        } else {
-            passwordField.setBackgroundColor(getResources().getColor(R.color.mdtp_white));
-            passwordField.setHintTextColor(getResources().getColor(R.color.blue_grey_700));
-            return true;
-        }
+    private boolean validateEmail(){
+        return Tools.validateEmail(emailField, mcontext);
     }
 
     private boolean confirmPasswordMatch(){
-        String confirmPasswordText = confirmPasswordField.getText().toString().trim();
-        if(!confirmPasswordText.equals(passwordField.getText().toString())||confirmPasswordText.isEmpty()){ ;
-            confirmPasswordField.setError("Passwords don't match", getResources().getDrawable(R.drawable.ic_error_outline));
-            return false;
-        } else {
-            confirmPasswordField.setBackgroundColor(getResources().getColor(R.color.mdtp_white));
-            confirmPasswordField.setHintTextColor(getResources().getColor(R.color.blue_grey_700));
-            confirmPasswordField.setError("Passwords Matched!", getResources().getDrawable(R.drawable.ic_done));
-            return true;
-        }
+        return Tools.confirmPasswordMatch(passwordField, confirmPasswordField, mcontext);
     }
 
     private boolean getSignUpEligibility(){
@@ -254,7 +231,7 @@ public class GuestSignup extends AppCompatActivity {
             return true;
         }
     }
-
+    //UI and Animation methods
     private void loadingAndDisplayContent() {
         final LinearLayout guest_signup_progress = (LinearLayout) findViewById(R.id.guest_signup_progress);
         guest_signup_progress.setVisibility(View.VISIBLE);
@@ -262,19 +239,9 @@ public class GuestSignup extends AppCompatActivity {
         ViewAnimation.fadeOut(guest_signup_progress);
     }
 
-    private void snackBarIconInfo(String infoText, int colorId, int drawableIcon) {
-        final Snackbar snackbar = Snackbar.make(parentView, "", Snackbar.LENGTH_LONG);
-        //inflate view
-        View custom_view = getLayoutInflater().inflate(R.layout.snackbar_icon_text, null);
-
-        Snackbar.SnackbarLayout snackBarView = (Snackbar.SnackbarLayout) snackbar.getView();
-        snackBarView.setPadding(0, 0, 0, 0);
-
-        ((TextView) custom_view.findViewById(R.id.message)).setText(infoText);
-        ((ImageView) custom_view.findViewById(R.id.icon)).setImageResource(drawableIcon);
-        (custom_view.findViewById(R.id.parent_view)).setBackgroundColor(getResources().getColor(colorId));
-        snackBarView.addView(custom_view, 0);
-        snackbar.show();
+    private void stopLoadingAnimation(){
+        final LinearLayout guest_signup_progress = (LinearLayout) findViewById(R.id.guest_signup_progress);
+        guest_signup_progress.setVisibility(View.GONE);
     }
 
     private void showGenderDialog(final View v) {
@@ -293,18 +260,38 @@ public class GuestSignup extends AppCompatActivity {
         builder.show();
     }
 
-    private void storeUserDetails(String email, String password, String name, String gender, String phone){
-        ref = firebaseFirestore.collection("users").document(email);
-        //and further firestore operations
+    private void snackBarActionDark(String infoText) {
+        final Snackbar snackbar = Snackbar.make(parentView, "", Snackbar.LENGTH_INDEFINITE);
+        //inflate view
+        View custom_view = getLayoutInflater().inflate(R.layout.snackbar_toast_floating_dark, null);
 
-        ref.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+        snackbar.getView().setBackgroundColor(Color.TRANSPARENT);
+        Snackbar.SnackbarLayout snackBarView = (Snackbar.SnackbarLayout) snackbar.getView();
+        snackBarView.setPadding(0, 0, 0, 0);
+        (custom_view.findViewById(R.id.sb_dark_action)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendEmailVerificationLink();
+                snackbar.dismiss();
+                Snackbar sb = Snackbar.make(parentView, "The email has been resent", Snackbar.LENGTH_LONG);
+                sb.show();
+            }
+        });
+        ((TextView) custom_view.findViewById(R.id.sb_dark_message)).setText(infoText);
+        snackBarView.addView(custom_view, 0);
+        snackbar.show();
+    }
+
+    //firebase and firestore methods
+    private void storeUserDetails(String email, String name, String gender, String phone){
+        ref = firebaseFirestore.collection("users").document();
+
+        ref.get().addOnSuccessListener(this, new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                loadingAndDisplayContent();
                 Map<String, Object> signupEntry = new HashMap<>();
                 signupEntry.put("Name", name);
                 signupEntry.put("Email", email);
-                signupEntry.put("Password", password);
                 signupEntry.put("Gender", gender);
                 signupEntry.put("Phone", phone);
                 signupEntry.put("Role", "guest");
@@ -315,44 +302,113 @@ public class GuestSignup extends AppCompatActivity {
                         .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                             @Override
                             public void onSuccess(DocumentReference documentReference) {
-                                snackBarIconInfo("Your Account has been Created",
-                                        R.color.blue_grey_700, R.drawable.ic_error_outline);
+                                sendEmailVerificationLink();
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                snackBarIconInfo("Account not Created!",
-                                        R.color.blue_grey_700, R.drawable.ic_error_outline);
+                                mAuth.getCurrentUser().delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        stopLoadingAnimation();
+                                        Log.d("Msg", "User Deleted");
+                                        Tools.snackBarIconInfo(mcontext, parentView,
+                                                getLayoutInflater(),
+                                                "Account not Created: " + e.getLocalizedMessage(),
+                                                R.color.blue_grey_700, R.drawable.ic_error_outline);
+                                    }
+                                });
                                 Log.d("Error", e.getMessage());
                             }
                         });
+            }
+        }).addOnFailureListener(this, new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull @NotNull Exception e) {
+                mAuth.getCurrentUser().delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        stopLoadingAnimation();
+                        Log.d("Msg", "User Deleted");
+                        Tools.snackBarIconInfo(mcontext, parentView,
+                                getLayoutInflater(), "Account not Created: " + e.getLocalizedMessage(),
+                                R.color.blue_grey_700, R.drawable.ic_error_outline);
+                    }
+                });
             }
         });
     }
 
     private void createAccount(String email, String password, String name, String gender, String phone) throws FirebaseAuthUserCollisionException {
         // [START create_user_with_email]
+        loadingAndDisplayContent();
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        loadingAndDisplayContent();
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("Msg", "createUserWithEmail:success");
-                            storeUserDetails(email, password, name, gender, phone);
+                            storeUserDetails(email, name, gender, phone);
                         } else {
                             // If sign in fails, display a message to the user.
-                            snackBarIconInfo("Registration Failed, " + task.getException().getLocalizedMessage(),
+                            stopLoadingAnimation();
+                            Tools.snackBarIconInfo(mcontext, parentView, getLayoutInflater(), "Registration Failed, " + task.getException().getLocalizedMessage(),
                                     R.color.blue_grey_700, R.drawable.ic_error_outline);
                             Log.w("Msg", "createUserWithEmail:failure", task.getException());
                         }
                     }
-                });
+                }).addOnFailureListener(this, new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull @NotNull Exception e) {
+                stopLoadingAnimation();
+                Tools.snackBarIconInfo(mcontext, parentView, getLayoutInflater(), "Registration Failed, " + e.getLocalizedMessage(),
+                        R.color.blue_grey_700, R.drawable.ic_error_outline);
+                Log.w("Msg", "createUserWithEmail:failure", e);
+            }
+        });
         // [END create_user_with_email]
     }
 
+    private void sendEmailVerificationLink(){
+        FirebaseUser user = mAuth.getCurrentUser();
+
+        String url = "http://lodgeme.page.link/verify?uid=" + user.getUid();
+        ActionCodeSettings actionCodeSettings = ActionCodeSettings.newBuilder()
+                .setUrl(url)
+                // The default for this is populated with the current android package name.
+                .setAndroidPackageName("com.ztech.lodgeme", false, null)
+                .build();
+
+        user.sendEmailVerification(actionCodeSettings)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            stopLoadingAnimation();
+                            Log.d("Msg", "Email sent.");
+                            Tools.snackBarIconInfo(mcontext, parentView, getLayoutInflater(),
+                                    "Your Guest Account has been Created Successfully, " +
+                                            "check your email for verification link",
+                                    R.color.blue_grey_700, R.drawable.ic_done);
+                            resendEmail.setVisibility(View.VISIBLE);
+
+                        } else {
+                            stopLoadingAnimation();
+                            snackBarActionDark(task.getException().getLocalizedMessage());
+                        }
+                    }
+                }).addOnFailureListener(this, new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull @NotNull Exception e) {
+                stopLoadingAnimation();
+                snackBarActionDark(e.getLocalizedMessage());
+            }
+        });
+    }
+
+    //optional UI method
     private void updateUI(FirebaseUser user) {
          Intent intent = new Intent(mcontext, LoginActivity.class);
          startActivity(intent);

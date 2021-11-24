@@ -13,7 +13,7 @@
             android:background="@color/mdtp_white"
             app:contentInsetStartWithNavigation="0dp"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:titleTextColor="@color/blue_600"
+            app:titleTextColor="@color/grey_90"
             app:theme="@style/Toolbar.Light" />
 
     <androidx.core.widget.NestedScrollView
@@ -45,7 +45,7 @@
                 android:layout_marginTop="@dimen/spacing_middle"
                 android:visibility="visible"
                 app:cardCornerRadius="25dp"
-                app:cardElevation="1dp">
+                app:cardElevation="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -67,7 +67,7 @@
                         android:layout_height="92dp"
                         android:layout_marginTop="@dimen/spacing_xlarge"
                         android:src="@drawable/bg_agnt1"
-                        app:civ_background_color="@color/blue_600"
+                        app:civ_background_color="@color/colorPrimary"
                         app:civ_border="true"
                         app:civ_border_color="@color/blue_600"
                         app:civ_shadow_color="@color/grey_10"
@@ -79,7 +79,7 @@
                         android:layout_marginTop="@dimen/spacing_large"
                         android:text="AGENT?"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textColor="@color/blue_600" />
+                        android:textColor="@color/blue_grey_400" />
                 </LinearLayout>
 
                     <LinearLayout
@@ -115,7 +115,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="?attr/actionBarSize"
                                 android:background="@android:color/transparent"
-                                android:tint="@color/blue_grey_200"
+                                android:tint="@color/grey_90"
                                 app:srcCompat="@drawable/ic_info" />
 
                         </LinearLayout>
@@ -141,7 +141,7 @@
                 android:layout_marginTop="@dimen/spacing_middle"
                 android:visibility="visible"
                 app:cardCornerRadius="25dp"
-                app:cardElevation="1dp">
+                app:cardElevation="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -174,7 +174,7 @@
                         android:layout_marginTop="@dimen/spacing_large"
                         android:text="GUEST?"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textColor="@color/blue_600" />
+                        android:textColor="@color/blue_grey_400" />
 
                 </LinearLayout>
 
@@ -213,7 +213,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="?attr/actionBarSize"
                                 android:background="@android:color/transparent"
-                                android:tint="@color/blue_grey_200"
+                                android:tint="@color/grey_90"
                                 app:srcCompat="@drawable/ic_info" />
                         </LinearLayout>
 

@@ -18,8 +18,8 @@ public class GuestProfileMenu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guest_profile_menu);
-        Tools.setSystemBarColor(this, R.color.blue_grey_800);
-        getWindow().setNavigationBarColor(getColor(R.color.blue_grey_800));
+        Tools.setSystemBarColor(this, R.color.grey_90);
+        getWindow().setNavigationBarColor(getColor(R.color.grey_90));
         mAuth = FirebaseAuth.getInstance();
         nameText = findViewById(R.id.guest_name);
         setUserDisplayName();

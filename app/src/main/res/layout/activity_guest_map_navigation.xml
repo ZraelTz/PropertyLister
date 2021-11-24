@@ -55,7 +55,7 @@
                     android:clickable="false"
                     android:text="Recent"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    android:tint="@color/blue_grey_700"
+                    android:tint="@color/grey_90"
                     app:srcCompat="@drawable/ic_recent" />
 
                 <TextView
@@ -63,7 +63,7 @@
                     android:layout_height="wrap_content"
                     android:text="Recents"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-                    android:textColor="@color/blue_grey_200"
+                    android:textColor="@color/grey_40"
                     android:textStyle="normal" />
 
             </LinearLayout>
@@ -85,7 +85,7 @@
                     android:layout_height="20dp"
                     android:clickable="false"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    android:tint="@color/blue_grey_700"
+                    android:tint="@color/grey_90"
                     app:srcCompat="@drawable/ic_near_me" />
 
                 <TextView
@@ -93,7 +93,7 @@
                     android:layout_height="wrap_content"
                     android:text="Nearby"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-                    android:textColor="@color/blue_grey_200"
+                    android:textColor="@color/grey_40"
                     android:textStyle="normal" />
 
             </LinearLayout>
@@ -115,7 +115,7 @@
                     android:layout_height="20dp"
                     android:clickable="false"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    android:tint="@color/blue_grey_700"
+                    android:tint="@color/grey_90"
                     app:srcCompat="@drawable/ic_favorites" />
 
                 <TextView
@@ -123,7 +123,7 @@
                     android:layout_height="wrap_content"
                     android:text="Saved"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-                    android:textColor="@color/blue_grey_200"
+                    android:textColor="@color/grey_40"
                     android:textStyle="normal" />
 
             </LinearLayout>
@@ -145,7 +145,7 @@
                     android:layout_height="20dp"
                     android:clickable="false"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    android:tint="@color/blue_grey_700"
+                    android:tint="@color/grey_90"
                     app:srcCompat="@drawable/ic_format_list_bulleted" />
 
                 <TextView
@@ -153,7 +153,7 @@
                     android:layout_height="wrap_content"
                     android:text="List"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-                    android:textColor="@color/blue_grey_200"
+                    android:textColor="@color/grey_40"
                     android:textStyle="normal" />
 
             </LinearLayout>

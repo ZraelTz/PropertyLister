@@ -16,12 +16,16 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
+import android.util.Patterns;
 import android.util.TypedValue;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -29,7 +33,9 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.material.snackbar.Snackbar;
 import com.ztech.lodgeme.R;
+import com.ztech.propertylister.utils.Regex;
 
 import java.net.URI;
 import java.text.SimpleDateFormat;
@@ -398,4 +404,57 @@ public class Tools {
             return uri;
         }
     }
+
+    public static boolean validatePassword(EditText passwordField, Context context){
+        String passwordInput = passwordField.getText().toString().trim();
+        if(passwordInput.isEmpty()){
+            passwordField.setError("Password is required", context.getDrawable(R.drawable.ic_error_outline));
+            return false;
+        } else if(!Regex.PASSWORD_REGEX.matcher(passwordInput).matches()){
+            passwordField.setError("Password must consist at least 8 characters including a symbol", context.getDrawable(R.drawable.ic_error_outline));
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public static boolean validateEmail(EditText emailField, Context context){
+        String emailInput = emailField.getText().toString().trim();
+        if(emailInput.isEmpty()){
+            emailField.setError("Email is required", context.getDrawable(R.drawable.ic_error_outline));
+            return false;
+        } else if(!Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()){
+            emailField.setError("Please provide a valid Email Address", context.getDrawable(R.drawable.ic_error_outline));
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public static boolean confirmPasswordMatch(EditText passwordField, EditText confirmPasswordField, Context context){
+        String confirmPasswordText = confirmPasswordField.getText().toString().trim();
+        if(!confirmPasswordText.equals(passwordField.getText().toString())||confirmPasswordText.isEmpty()){
+            confirmPasswordField.setError("Passwords don't match", context.getDrawable(R.drawable.ic_error_outline));
+            return false;
+        } else {
+            confirmPasswordField.setError("Passwords Matched!", context.getDrawable(R.drawable.ic_done));
+            return true;
+        }
+    }
+
+    public static void snackBarIconInfo(Context context, View parentView, LayoutInflater inflater, String infoText, int colorId, int drawableIcon) {
+        final Snackbar snackbar = Snackbar.make(parentView, "", Snackbar.LENGTH_LONG);
+        //inflate view
+        View custom_view = inflater.inflate(R.layout.snackbar_icon_text, null);
+
+        Snackbar.SnackbarLayout snackBarView = (Snackbar.SnackbarLayout) snackbar.getView();
+        snackBarView.setPadding(0, 0, 0, 0);
+
+        ((TextView) custom_view.findViewById(R.id.message)).setText(infoText);
+        ((ImageView) custom_view.findViewById(R.id.icon)).setImageResource(drawableIcon);
+        (custom_view.findViewById(R.id.parent_view)).setBackgroundColor(context.getColor(colorId));
+        snackBarView.addView(custom_view, 0);
+        snackbar.show();
+    }
+
 }

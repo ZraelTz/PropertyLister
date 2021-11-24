@@ -48,7 +48,6 @@ public class Splash extends AppCompatActivity {
                     @Override
                     public void run() {
                         mAuth = FirebaseAuth.getInstance();
-                        mAuth.signOut();
                         FirebaseUser currentUser = mAuth.getCurrentUser();
                         if(currentUser != null){
                             getUserRole();
@@ -57,7 +56,7 @@ public class Splash extends AppCompatActivity {
                             finish();
                         }
                     }
-                },1000
+                },1500
 
         );
     }

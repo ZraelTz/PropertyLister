@@ -13,7 +13,7 @@
         android:fitsSystemWindows="false"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:contentInsetStartWithNavigation="0dp"
-        app:titleTextColor="@color/blue_600"
+        app:titleTextColor="@color/grey_90"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
 
@@ -56,7 +56,7 @@
                     android:layout_height="@dimen/spacing_middle"
                     android:layout_margin="@dimen/spacing_medium"
                     android:src="@drawable/shape_circle"
-                    app:tint="@color/blue_grey_700" />
+                    app:tint="@color/grey_90" />
 
                 <View
                     android:layout_width="13dp"
@@ -67,7 +67,18 @@
                     android:layout_height="wrap_content"
                     android:text="Account Information"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
-                    android:textColor="@color/blue_grey_700" />
+                    android:textColor="@color/grey_90" />
+
+                <TextView
+                    android:id="@+id/resend_email_agent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="120px"
+                    android:clickable="true"
+                    android:text="Didn't get email?"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -164,7 +175,7 @@
                     android:layout_height="@dimen/spacing_middle"
                     android:layout_margin="@dimen/spacing_medium"
                     android:src="@drawable/shape_circle"
-                    app:tint="@color/blue_grey_700" />
+                    app:tint="@color/grey_90" />
 
                 <View
                     android:layout_width="@dimen/spacing_middle"
@@ -175,7 +186,7 @@
                     android:layout_height="wrap_content"
                     android:text="Agent Information"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
-                    android:textColor="@color/blue_grey_700" />
+                    android:textColor="@color/grey_90" />
 
             </LinearLayout>
 
@@ -211,13 +222,16 @@
                         android:background="@color/grey_5" />
 
                     <EditText
-                        android:id="@+id/agent_dob"
+                        android:id="@+id/dob"
                         style="@style/EditText.Flat.Grey"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/spacing_xxlarge"
                         android:background="@android:color/transparent"
-                        android:hint="Date of Birth"
-                        android:inputType="text"
+                        android:drawableEnd="@drawable/ic_arrow_drop_grey"
+                        android:drawableRight="@drawable/ic_arrow_drop_grey"
+                        android:editable="false"
+                        android:focusable="false"
+                        android:hint="Date Of Birth"
                         android:minHeight="@dimen/spacing_xmlarge"
                         android:paddingLeft="@dimen/spacing_large"
                         android:paddingRight="@dimen/spacing_large" />
@@ -303,7 +317,7 @@
                     android:layout_height="wrap_content"
                     android:text="Already have an account? "
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
-                    android:textColor="@color/blue_grey_200" />
+                    android:textColor="@color/grey_40" />
 
                 <TextView
                     android:id="@+id/agent_sign_in"
@@ -312,7 +326,7 @@
                     android:clickable="true"
                     android:text="Sign In"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
-                    android:textColor="@color/blue_600"
+                    android:textColor="@color/colorPrimary"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -346,7 +360,7 @@
         android:layout_alignParentRight="true"
         android:layout_margin="@dimen/spacing_large"
         android:clickable="true"
-        app:backgroundTint="@color/blue_grey_800"
+        app:backgroundTint="@color/grey_90"
         app:fabSize="normal"
         app:rippleColor="@color/blue_grey_700"
         app:srcCompat="@drawable/ic_done" />

@@ -154,7 +154,7 @@ public class ViewAnimation {
         v.setAlpha(1.0f);
         // Prepare the View for the animation
         v.animate()
-                .setDuration(500)
+                .setDuration(Integer.MAX_VALUE)
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
