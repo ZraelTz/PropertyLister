@@ -10,7 +10,8 @@ The goal is to have agent/guest user types who can respectively create and acces
 ![Preview](lm2.png)
 ![Preview](lm3.png)
 ![Preview](lm4.png)
-![Preview](lm5.png)
+![Preview](Screenshot_20211129-032954.png)
+![Preview](Screenshot_20211129-033048.png)
 
 **Application:**
 [Debug apk version](app-debug.apk)
